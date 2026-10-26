@@ -1,0 +1,12 @@
+Options -Indexes
+RewriteEngine On
+
+# ── Block all sensitive directories ──────────────────────────────────────────
+RewriteRule ^(config|app|bootstrap|cron|database|vendor|storage)(/|$) - [F,L]
+
+# ── Block sensitive files ─────────────────────────────────────────────────────
+RewriteRule \.env$     - [F,L]
+RewriteRule \.lock$    - [F,L]
+RewriteRule composer\. - [F,L]
+RewriteRule \.log$     - [F,L]
+RewriteRule \.json$    - [F,L]

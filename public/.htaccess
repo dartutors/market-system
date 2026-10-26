@@ -1,0 +1,18 @@
+Options -Indexes
+RewriteEngine On
+
+# No RewriteBase: mod_rewrite infers it from the directory this .htaccess
+# lives in, which is correct whether that directory IS the document root
+# (production — the domain points straight at public/) or a subfolder under
+# it (local XAMPP — http://localhost/market-system/public/). A hardcoded
+# RewriteBase here was tied to the local path specifically and would have
+# broken routing in production.
+
+# ── Force HTTPS (enable once SSL certificate is confirmed active) ─────────────
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ── Route all non-file/non-dir requests through index.php ─────────────────────
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
